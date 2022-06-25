@@ -1,0 +1,218 @@
+
+
+What is Git ? - Free and open source verion control system. It was created by Linus Torvalds in 2005, and has been maintained by Junio Hamano since then.
+
+What is Version Control ? - The management of changes to documents, computer programs, large web sites, and other collections of information. 
+
+Git helps you keep track of code changes and also to track who made changes.
+Git is used to collaborate on code
+
+Terms -- Directory -> Folder.
+	Terminal or Command line -> Interface for Text Commands. (Bash is most widely used terminal in world.)
+	CLI -> Command Line Interface. 
+	cd -> Change Directory.
+	Repository (repo) -> Project, or the folder/place where your project is kept. 
+	Remote repo -> Any repo that is stored somewhere other than locally is called remote repo. 
+	Github -> A website to host your repositories online (Remote Repository Platform).
+	(Bitbucket and GitLab are some other remote repo platforms like Github.)
+	Git is tool that track changes in your code over time. 
+
+Why Github ? - GitHub makes tools that use Git. GitHub is the largest host of source code in the world, and has been owned by Microsoft since 2018.
+	         It allows people to add something to project. 
+
+Git Commands ->
+ 	Clone -> Bring a repository that is hosted somewhere like Github into a folder on your local machine.
+	add ->  Track your files and changes in Git.
+	commit -> Save your files in Git.
+	push -> Upload Git commits to remote repo like Github.
+	pull -> Download changes from remote repo to your local machine, the opposite of push. 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Terminal -
+In general, lines with $ in front of it is input. These are the commands you can copy and run in your terminal.
+
+Bash is unix shell and command language.  We can run ubuntu terminal as windows subsytem for linux.  Bash/ubuntu has different commands than windows command prompt. 
+
+	Names of folder is case sensitive. 
+	''cd <path (e.g. mnt/c/users/91704........)>'' ->  take us in to our directory. mnt stands for mount. 
+	''cd ..''  ->   takes one level back in directory. 
+	''cd ~''  ->  take us out from all directories and take to default directory . 
+	"cd  /"  ->   take us out from all directories and take to top level directory. (Note : "/" is top level directory.) 
+	"cd ~/folder1/" -> takes out of current directories and go into the folder1. 
+
+	''ls'' ->  lists all files or folders in your current directory. 
+	''mkdir <folder_name>''  -> creates a folder/directory in current directory. (mkdir - make directory.)
+	"rm -rf  <folder_name>" -> removes/delets folder. If there are more folders in a folder then removing top most folder removes all folders inside.  
+
+	'-' -> is for altering properties of commands.  
+
+	''touch <file_name.txt/.doc/.csv>'' -> helps to create filename. 
+	"rm <file.txt>" -> to remove files and adding ''-rf''' changes it to remove folder. 
+
+	''echo $null >> filename.txt'' -> create file with help of windows powershell. 
+	''rm .\file.txt'' -> remove file for windows powershell. 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Repository vs Directory-
+Repos are timelines of the entire project, including all previous changes. 
+Directories, or 'working directories' are projects at their current state in time. 
+
+-----------------------------------------------------------------------------------------------
+
+Git Workflow -
+
+Before Git tracks a change, it goes through a long chain of operations and tasks.
+Many of these tasks are user controlled, and are required for changes to be tracked correctly.
+
+Working directory------Changes made to working directory------[Add/Remove to/from working area<------->STAGING AREA]--------Commit changes------->Local Repository(Local machine drive)=====Remote Repository (Github)
+
+The staging area is the bundle of all the modifications to the project that are going to be committed.
+A ‘commit’ is similar to taking a snapshot of the current state of the project, then storing it on a timeline.
+
+------------------------------------------------------------------------------------------------------------
+
+Actual Working with Git - 
+
+git config --global user.email "abc@gmail.com" and git config --global user.name "abcd"  -> to configure yor email and name in git. 
+
+Initialize - 
+	We can't use git commands directly on any direcctory. We need to initiallize a directory as git repository. For this we need to use "git init" command. 
+	Then currrent path directory will be initaliazed as git repo and we can use git commands on it.
+	if repository is not present then it creates new git repository.
+ 	(Note that this step is irreversible hence we need to be careful about path of directory. It should be correct path. )
+
+After initializing directory, a .git folder will be automatically created in that directory. 
+
+Tracked - files that Git knows about and are added to the repository
+Untracked - files that are in your working directory, but not added to the repository
+
+Adding or Removing Files - 
+	''git status'' shows current status of staging area (shows tracked and untracked files present now). 
+	 "git add <file>..."  -> to update what will be committed. (if file is in working dir then it will be added to staging environment or if file is removed form working dir then it will be removed from staging environment.)
+	(In short it updates staging area with changes made in working dir.)
+	 "git restore <file>..." ->  to discard changes in working directory.
+	 "git rm --cached <file>..." ->  to unstage the file. (but keep it in working directory.)
+ 	"git rm -f <file>" -> to completely wipe out the file. (force removal.) 
+
+If we want to stage/unstage changes of more than one file in git then by using commands with indivisual names, we will use "--all" or "." (dot) after command (add or rm). 
+(Note: The shorthand command for ''git add --all'' is ''git add -A'')
+ -r   ->  allow recursive removal
+ git rm -r -f . - > to remove all files at a time (forcefully).
+
+
+git commit --help -> to view commit maual. (all flags and commands aare present in manual with discription.)
+
+git status --short ->  to check status in more compact way . 
+Short status flags are:
+    ?? - Untracked files
+    A - Files added to stage
+    M - Modified files
+    D - Deleted files
+
+When we make changes in directory by adding/removing/changing content in file , then we need to stage it every time (by using git add or git rm or git restore commands) and then need to commit it. 
+However, we can directly commit changes by skipping staging of them via using '-a' after "git commit" command. 
+(But skiping staging area always is not recommmended.)
+
+git log -> to see all commits done with commit id, msg and timing.
+git log --oneline ->  to avoid long list and see just one line per commit.  
+git checkout <commit id> -> by this we can move to different commits and see them.  
+
+Git Revert- revert is the command we use when we want to take a previous commit and add it as a new commit, keeping the log intact. (it is like add new commit reversing previous commit).
+Git Reset - reset is more dangerous than revert. It take to any previous commit. There are three types of reset flags. soft, mixed(default), hard(most dangerous). 
+
+          Soft - 	Using the ‘—soft’ flag will change your commit, but will not remove any of the changes you have made.
+	For example, if you reset back one commit, your environment would be the same, but the commit you are on would be changed.
+	This is useful if you are trying to get rid of a problem with the commit (eg. Spelling error)
+
+          Mixed(default) - Instead of keeping everything staged and ready to commit, it instead changes the ‘stage’ to match the commit you’re reverting to.
+		This doesn’t remove the files; they are still in the working directory. However, you have to commit them again if you want to re-include them.
+		This is primarily useful for when you want to remove a file you accidentally committed.	
+
+           Hard - ‘—hard’ is the strongest out of the three, and the most commonly used.
+	       Using this flag will reset the repository as if you were still working on that commit; leaving no data from any commits after it. 
+	       This is mostly used when some irreversible error has been made, and cannot be removed manually without completely resetting the program. 
+
+Git commit --amend ->  It is used to modify the most recent commit.
+	    	    It combines changes in the staging environment with the latest commit, and creates a new commit.
+	     	    This new commit replaces the latest commit entirely.
+		   One of the simplest things you can do with --amend is to change a commit message.(git commit --amend -m "new massege")
+		   Adding files with --amend works the same way as above. Just add them to the staging environment before committing.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Git Branches -
+	Git branches are ways of creating separate development paths without overiding the same or creating copies of project.
+	Branches can be added, deleted, merged just like regulr commits. 
+ 	It can be helpful if we have different end goals for same project. We can create branches for bugs, development, master,..etc. 
+	(Another defination of branches - A branch is a chain of commits that are on a separate timeline from the master, therefore, they do not have conflicting timelines.)
+
+Our starting branch is master branch. 
+To create a new branch and switch into it we use -> git checkout -b <branch name>
+To just create a new branch -> git branch <branch name>
+To see all branches -> git branch -a (it will also show us on which branch we are currently now.)
+To switch from one branch to other -> git checkout <branch name>
+To delete a branch -> git branch -d <branch name>
+
+Merging branches -> We can merge any branch with any branch.  Switch on main branch which with you want to merge another. 
+		"git merge <name of another branch>" helps to do it. We can do it multiple times.  
+		After this another branch will be as it is and this current branch will be like union of both branches . 
+		Merging only takes the last commit of the source branch.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GitHub-
+	GitHub's main goal is to allow people to work together on projects.
+Forking clones the repository into your repository list; pulling takes a branch from a repository and fits it into your already existing repository. 
+
+git remote add origin <URL from GitHub> - To connect local repo to remote repo on github.
+git remote -v -  Shows you all of your remote origins. It shows you the remote origins you use to push and pull information.   
+git pull origin <remote branch  name> - To pull info from Github repo. 
+git push -u origin <branch name> - To push info to Github repo.  
+git push origin --delete <branch name> - To delete remote branch .
+
+Git Fetch - fetch gets all the change history of a tracked branch/repo. (git fetch origin)
+So, on your local Git, fetch updates to see what has changed on GitHub. 
+Merge current branch with remote - git merge origin/<remote branch name>
+Pull is combination of fetch and merge. It used to updaate our local repo with github. 
+
+To see all local and remote branches - ''git branch -a ''
+To see only remote branches - ''git branch -r''
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Source tree  - It is git GUI (Graphic User Interface).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
