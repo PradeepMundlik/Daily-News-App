@@ -23,19 +23,19 @@ function doSomething(){
     document.querySelector('form').remove();
     News(count,cat,cc);
     // var a = document.createElement('ol');
-    
+
     // var tree = document.createDocumentFragment();
     // var link = document.createElement("p");
     // link.setAttribute("id", "id1");
     // link.appendChild(document.createTextNode(cat));
     // tree.appendChild(link);
-    
+
     // // var tree = document.createDocumentFragment();
     // var link = document.createElement("p");
     // link.setAttribute("id", "id2");
     // link.appendChild(document.createTextNode(cc));
     // tree.appendChild(link);
-    
+
     // // var tree = document.createDocumentFragment();
     // var link = document.createElement("p");
     // link.setAttribute("id", "id3");
@@ -51,7 +51,7 @@ function doSomething(){
     //     var link = document.createElement("p");
     //     link.setAttribute("id", "id1");
     //     link.appendChild(document.createTextNode(cat));
-    //     tree.appendChild(link);   
+    //     tree.appendChild(link);
     // }
     // document.getElementById("main").appendChild(tree);
 
@@ -69,7 +69,7 @@ function News(count, cat, cc){
     // for (let k = 0; k < 3*count; k++) {
     //     var p = document.createElement("p");
     //     var a = document.createTextNode("loading...");
-    //     p.appendChild(a);       
+    //     p.appendChild(a);
     // }
     // var node_list = document.querySelectorAll("p");
     // console.log(node_list);
@@ -78,20 +78,23 @@ function News(count, cat, cc){
     for (let i = 0; i < count; i++) {
         var link = document.createElement("h5");
         link.setAttribute("id", "id"+i);
+        link.setAttribute("class", "heading");
         link.appendChild(document.createTextNode("loading"));
-        tree.appendChild(link);  
+        tree.appendChild(link);
 
         var div = document.createElement("p");
         div.setAttribute("id", "des"+i);
+        div.setAttribute("class", "description");
         div.appendChild(document.createTextNode("divText"));
         tree.appendChild(div);
 
         var link = document.createElement("a");
         link.setAttribute("id", "url"+i);
+        link.setAttribute("class", "refurl");
         // link.setAttribute("href", "http://site.com");
         link.appendChild(document.createTextNode("loading"));
-        tree.appendChild(link);  
-        
+        tree.appendChild(link);
+
     }
     document.getElementById("main").appendChild(tree);
     fetch(url, options)
@@ -99,21 +102,21 @@ function News(count, cat, cc){
         .then(data => {
             for (let i = 0; i < count;i++) {
                 var j = i + 1;
-                
+
                 document.getElementById('id'+i).innerHTML ='<hr>' + '<br>' + j + '. Title: ' + data.value[i].name;
                 document.getElementById('des'+i).innerHTML = 'Description:'.bold() + data.value[i].description;
                 document.getElementById('url'+i).setAttribute("href",data.value[i].url);
                 document.getElementById('url'+i).innerHTML = 'Reference URL:'.bold() + data.value[i].url;
-                
-                
-                //+ '<br>Reference URL:' + data.value[i].url + '<br>' + data.value[i].description + "<br><br>";  
-                // i++;          
+
+
+                //+ '<br>Reference URL:' + data.value[i].url + '<br>' + data.value[i].description + "<br><br>";
+                // i++;
                 // document.getElementById('element'+i).innerHTML = 'url: ' + data.value[i-1].url;
                 // i++;
-                // document.getElementById('element'+i).innerHTML = 'description: ' + data.value[i-1].description;  
-                // i++;       
+                // document.getElementById('element'+i).innerHTML = 'description: ' + data.value[i-1].description;
+                // i++;
             }
-            
+
         })
         .catch(err => console.error(err));
 }
