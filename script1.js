@@ -1,6 +1,7 @@
 var cat;
 var count;
 var cc;
+// document.querySelector("button").setAttribute("onclick","doSomething()");
 // function getOption_cat() {
 //     var a = document.getElementById("mycat");
 //     cat = a.options[a.selectedIndex].text;
@@ -100,7 +101,7 @@ function News(count, cat, cc){
     fetch(url, options)
         .then(response => response.json())
         .then(data => {
-            for (let i = 0; i < count;i++) {
+            for (let i = 0; i < count; i++) {
                 var j = i + 1;
 
                 document.getElementById('id'+i).innerHTML ='<hr>' + '<br>' + j + '. Title: ' + data.value[i].name;
